@@ -19,6 +19,9 @@ class Gericht
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $beschreibung;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $preis;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Gericht
     public function setBeschreibung(?string $beschreibung): self
     {
         $this->beschreibung = $beschreibung;
+
+        return $this;
+    }
+
+    public function getPreis(): ?float
+    {
+        return $this->preis;
+    }
+
+    public function setPreis(?float $preis): self
+    {
+        $this->preis = $preis;
 
         return $this;
     }

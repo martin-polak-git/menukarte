@@ -27,10 +27,10 @@
         {% for gericht in gerichte %}
             <tr>
                 <td>{{gericht.id}}</td>
-                <td>{{gericht.name}}</td>
+                <td> <a href="{{ path('gericht.anzeigen',{id:gericht.id}) }}">{{gericht.name}}</a></td>
                 <td>{{gericht.beschreibung}}</td>
                 <td>{{gericht.preis}}</td>
-                <td> <td><a href="{{ path('gericht.entfernen',{id:gericht.id}) }}">x</a></td></td>
+                <td> <a href="{{ path('gericht.entfernen',{id:gericht.id}) }}">x</a></td>
                 <td></td>
             </tr>
         {% endfor %}

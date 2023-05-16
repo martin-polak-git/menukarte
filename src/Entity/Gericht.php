@@ -16,6 +16,12 @@ class Gericht
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $bild;
+
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Kategorie", inversedBy="")]
+    private $kategorie;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $beschreibung;
 
@@ -59,6 +65,18 @@ class Gericht
     public function setPreis(?float $preis): self
     {
         $this->preis = $preis;
+
+        return $this;
+    }
+
+    public function getBild(): ?string
+    {
+        return $this->bild;
+    }
+
+    public function setBild(string $bild): self
+    {
+        $this->bild = $bild;
 
         return $this;
     }

@@ -36,6 +36,19 @@ class GerichtController extends AbstractController {
 
         //Speichern mit Entity Manager und Weiterleiten
         if ($form->isSubmitted()) {
+            $bild = $form->get('anhang')->getData();
+
+            if ($bild) {
+                $dateiname = md5(uniqid()).'.'.$bild->guessClientExtension();
+            }
+
+            $bild->move(
+                $this->getParameter('bilder_ordner'),
+                $dateiname
+            );
+
+            $gericht->setBild($dateiname);
+
             $em = $doctrine->getManager();
             $em->persist($gericht);
             $em->flush();
@@ -61,6 +74,15 @@ class GerichtController extends AbstractController {
         $this->addFlash('erfolg', 'Gericht wurde erfolgreich entfernt');
 
         return $this->redirect($this->generateUrl('gericht.bearbeiten'));
+    }
+
+    #[Route('/anzeigen/{id}', name: 'anzeigen')]
+    public function anzeigen(Gericht $gericht) {
+
+        return $this->render('gericht/anzeigen.html.twig', [
+            'gericht' => $gericht
+        ]);
+
     }
 
 }
